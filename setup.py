@@ -1,11 +1,11 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="Gkwebdav",
-    version="0.0.1",
+    version="0.0.2",
     author="Guoke",
     author_email="1962908113@qq.com",
     description="new Webdav Client for Python3+",
