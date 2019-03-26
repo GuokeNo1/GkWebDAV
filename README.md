@@ -1,4 +1,4 @@
-New webdav client for Python3+  
+GkWebDAV
 ======================= 
 
 ## 当前功能
@@ -15,104 +15,68 @@ New webdav client for Python3+
 |复制文件|```copy()```|
 |上传文件|```upload()```|
 |下载文件|```download()```|
+|检查文件是否存在|```exists()```|
+
+
+## 安装方法
   
-  
-使用方法
-=======================  
-  
-安装Gkwebdav模块  
-`pip install Gkwebdav`  
-  
-**创建Gkwebdav对象**
+使用 pip 安装 Gkwebdav 模块  
+```
+pip install Gkwebdav
+```  
+
+## 简单上手
 ```
 import Gkwebdav
 
+# 创建Gkwebdav对象
 webdav = Gkwebdav.Gkwebdav(url='webdavurl', username='username', password='password')
-```  
-  
-  
-**cwd** `当前所在目录`
-```
+
+# 输出当前所在工作目录，默认为'/'
 print(webdav.cwd)
-#返回当前所在目录位置默认'/'
-```  
-  
-  
-**cd()** `进入到目录`
-```
+
+# 切换工作目录，无返回值
 webdav.cd(path='dirname')
-#无返回值
-```  
-  
-  
-**ls()** `遍历文件目录`
-```
+
+# 返回目标目录内内容，参数缺省值为'/'
+# 执行成功时的返回值为：
+# {'success': True, 'result': [{'path': path, 'length': length, 'lastmodified': lastmodified, 'type': type}]}
+# 执行失败时的返回值为：
+# {'success': False, 'result': '失败代码'}
 webdav.ls([path=''])
-#成功返回值{'success': True, 'result': [{'path': '路径', 'length': 文件大小 , 'lastmodified': '最后的修改日期', 'type': '文件类型'}]}
-#失败返回值{'success': False, 'result': '失败代码'}
-```  
-  
-  
-**mkdir()** `创建单层文件夹`
-```
+
+# 创建文件夹，无返回值
 webdav.mkdir(path='newdirname')
-#返回None,调用ls()查看是否生效
-```  
-  
-  
-**mkdirs()** `创建多层目录`
-```
-webdav.mkdir(path='newdirname/newdirname/...')
-#返回None,调用ls()查看是否生效
-```
-**rmdir()** `删除目录`
-```
+
+# 递归创建一个文件夹，无返回值
+webdav.mkdir(path='newdir1/newdir2/.../newdir3')
+
+# 删除一个目录，无返回值
 webdav.rmdir(path='dirname')
-#返回None,调用ls()查看是否生效
-```  
-  
-  
-**delete()** `删除文件`
-```
+
+# 删除一个文件，无返回值
 webdav.delete(path='filename')
-#返回None,调用ls()查看是否生效
-```  
-  
-  
-**move()** `移动文件`
-```
+
+# 移动一个文件
+# 成功时的返回值为 {'success': True, 'result': ''}
+# 失败时的返回值为 {'success': False, 'result': ErrorCode}
 webdav.move(path='filename', new_path='newfilename')
-#成功返回值{'success': True, 'result': ''}
-#失败返回值{'success': False, 'result': '失败代码'}
-```  
-  
-  
-**copy()** `复制文件`
-```
+
+# 复制一个文件
+# 成功时的返回值为 {'success': True, 'result': ''}
+# 失败时的返回值为 {'success': False, 'result': ErrorCode}
 webdav.copy(path='filename', new_path='newfilename')
-#成功返回值{'success': True, 'result': ''}
-#失败返回值{'success': False, 'result': '失败代码'}
-```  
-  
-  
-**exists()** `检查文件是否存在`
-```
+
+# 检查一个文件是否存在，返回一个 bool 值
 webdav.exists(rmote_path='filename')
-#返回bool值
-```  
-  
-  
-**upload()** `文件上传`
-```
+
+# 上传一个文件
+# 成功时的返回值为 {'success': True, 'result': ''}
+# 失败时的返回值为 {'success': False, 'result': ErrorCode}
 webdav.upload(filename='local_filename', rmote_path='target_filename')
-#成功返回值{'success': True, 'result': ''}
-#失败返回值{'success': False, 'result': '失败代码'}
-```  
-  
-  
-**download()** `文件下载`
-```
+
+# 下载一个文件
+# 成功时的返回值为 {'success': True, 'result': ''}
+# 失败时的返回值为 {'success': False, 'result': ErrorCode}
 webdav.download(rmote_path='rmote_filename', local_path='save_filename')
-#成功返回值{'success': True, 'result': ''}
-#失败返回值{'success': False, 'result': '失败代码'}
 ```
